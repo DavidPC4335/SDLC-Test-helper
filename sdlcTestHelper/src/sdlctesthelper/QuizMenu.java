@@ -23,6 +23,14 @@ public class QuizMenu extends javax.swing.JFrame {
         t = loadTest(new File("src/sdlctesthelper/test.txt"));
     }
 
+    
+    
+    public Test loadTest(File f){
+        Test t = new Test();
+        
+        
+        return t;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
