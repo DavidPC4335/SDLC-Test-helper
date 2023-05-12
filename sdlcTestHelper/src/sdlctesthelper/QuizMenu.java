@@ -5,6 +5,8 @@
 package sdlctesthelper;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  *
@@ -27,7 +29,14 @@ public class QuizMenu extends javax.swing.JFrame {
     
     public Test loadTest(File f){
         Test t = new Test();
-        
+        try{
+            Scanner s = new Scanner(f);
+            while(s.hasNextLine()){
+                
+            }
+        }catch(FileNotFoundException e){
+           
+        }
         
         return t;
     }
