@@ -4,6 +4,8 @@
  */
 package sdlctesthelper;
 
+import java.io.File;
+
 /**
  *
  * @author dapav8190
@@ -14,9 +16,11 @@ public class QuizMenu extends javax.swing.JFrame {
      * Creates new form QuizMenu
      */
     MainMenu menu;
+    Test t;
     public QuizMenu(MainMenu m) {
         initComponents();
         this.menu =m;
+        t = loadTest(new File("src/sdlctesthelper/test.txt"));
     }
 
     /**
@@ -28,23 +32,95 @@ public class QuizMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnMenu = new javax.swing.JButton();
+        btn0 = new javax.swing.JRadioButton();
+        btn1 = new javax.swing.JRadioButton();
+        btn2 = new javax.swing.JRadioButton();
+        btn3 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnMenu.setText("menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(btn0);
+        btn0.setText("1.");
+
+        buttonGroup1.add(btn1);
+        btn1.setText("2.");
+
+        buttonGroup1.add(btn2);
+        btn2.setText("3.");
+
+        buttonGroup1.add(btn3);
+        btn3.setText("4.");
+
+        jLabel1.setText("<question>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMenu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn1)
+                                    .addComponent(btn2)
+                                    .addComponent(btn3)
+                                    .addComponent(btn0)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 285, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addComponent(btn0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btn1)
+                .addGap(16, 16, 16)
+                .addComponent(btn2)
+                .addGap(18, 18, 18)
+                .addComponent(btn3)
+                .addGap(62, 62, 62)
+                .addComponent(btnMenu)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        menu.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btn0;
+    private javax.swing.JRadioButton btn1;
+    private javax.swing.JRadioButton btn2;
+    private javax.swing.JRadioButton btn3;
+    private javax.swing.JButton btnMenu;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
