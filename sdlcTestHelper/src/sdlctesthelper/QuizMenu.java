@@ -19,23 +19,31 @@ public class QuizMenu extends javax.swing.JFrame {
      */
     MainMenu menu;
     Test t;
+    int selectIndex=0;
     public QuizMenu(MainMenu m) {
         initComponents();
         this.menu =m;
         t = loadTest(new File("src/sdlctesthelper/test.txt"));
+        btn0.setSelected(true);
     }
 
     
     
     public Test loadTest(File f){
         Test t = new Test();
+        String q ="";
+        String[] answers = new String[4];
         try{
             Scanner s = new Scanner(f);
             while(s.hasNextLine()){
-                
+                q = s.nextLine();
+                for (int i = 0; i < 4; i++) {
+                    answers[i] = s.nextLine();
+                }
             }
-        }catch(FileNotFoundException e){
-           
+            t.add(new Question(q,answers,Integer.parseInt(s.nextLine())));
+        }catch(Exception e){
+            System.out.println(e);
         }
         
         return t;
@@ -56,6 +64,7 @@ public class QuizMenu extends javax.swing.JFrame {
         btn2 = new javax.swing.JRadioButton();
         btn3 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        btnSubmit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,17 +77,44 @@ public class QuizMenu extends javax.swing.JFrame {
 
         buttonGroup1.add(btn0);
         btn0.setText("1.");
+        btn0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn0ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(btn1);
         btn1.setText("2.");
+        btn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(btn2);
         btn2.setText("3.");
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(btn3);
         btn3.setText("4.");
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn3ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("<question>");
+
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,8 +137,12 @@ public class QuizMenu extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(48, 48, 48)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 285, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(btnSubmit)
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +157,9 @@ public class QuizMenu extends javax.swing.JFrame {
                 .addComponent(btn2)
                 .addGap(18, 18, 18)
                 .addComponent(btn3)
-                .addGap(62, 62, 62)
+                .addGap(19, 19, 19)
+                .addComponent(btnSubmit)
+                .addGap(20, 20, 20)
                 .addComponent(btnMenu)
                 .addContainerGap())
         );
@@ -130,6 +172,27 @@ public class QuizMenu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
+        // TODO add your handling code here:
+        selectIndex =0;
+    }//GEN-LAST:event_btn0ActionPerformed
+
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+      selectIndex =1;
+    }//GEN-LAST:event_btn1ActionPerformed
+
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+         selectIndex =2;
+    }//GEN-LAST:event_btn2ActionPerformed
+
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+       selectIndex =3;
+    }//GEN-LAST:event_btn3ActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        //submit code
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton btn0;
@@ -137,6 +200,7 @@ public class QuizMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton btn2;
     private javax.swing.JRadioButton btn3;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
