@@ -28,9 +28,33 @@ It consists of several phases
 The farther the development cycle goes the more involved any problem fixes are
 The final step is maintenance
 0
-What real life project implemented the Gantt chart
+What real life project implemented the Gantt chart?
 Hoover dam
 Building CCVI
 Building my shed
-Constructing the Berlin wall
+Constructing the Berlin wall?
 0
+Which is not a phase of the Waterfall Model?
+Problem statement
+Emo
+Implementation
+Analysis
+1
+Which is not a measurement of success in the SDLC?
+It solves the proposed problem
+It can be scalable as/if the problem increases in size
+It was delivered in a timely fashion
+It contained a small trojan but was never accessed
+3
+What does the Gantt chart allow project managers to do?
+Visualize
+Schedule
+Track progress
+Circumnavigate
+3
+Which is untrue of UML?
+It stands for Unified Modeling Language
+It stands for Unified Cystic Fibrosis
+It visually specifies parts of a system
+Complex designs can be more easily described through UML than through text
+1
