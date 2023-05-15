@@ -13,10 +13,11 @@ public class Question {
 private String[] answers;
 private int correctIndex;
 private String feedback;
-public Question(String question,String[] answers,int correctIndex){
+public Question(String question,String[] answers,int correctIndex,String feedback){
     this.question = question;
     this.answers = answers.clone();
     this.correctIndex = correctIndex;
+    this.feedback = feedback;
 }
 public Question(String question,String answer1,String  answer2,String answer3,String answer4,int correctIndex,String feedback){
     

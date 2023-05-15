@@ -60,7 +60,7 @@ public class QuizMenu extends javax.swing.JFrame {
                 for (int i = 0; i < 4; i++) {
                     answers[i] = s.nextLine();
                 }
-                t.add(new Question(q,answers,Integer.parseInt(s.nextLine())));
+                t.add(new Question(q,answers,Integer.parseInt(s.nextLine()),"Feedback"));
             }
             
         }catch(Exception e){
@@ -258,11 +258,19 @@ public class QuizMenu extends javax.swing.JFrame {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         
+        
         t.answerQuestion(questionIndex,selectIndex);
-        questionIndex++;
-        if(questionIndex<t.getLength()){
+        if(questionIndex<t.getLength()-1){
+            questionIndex++;
             showQuestion(questionIndex);
         }else{
+            String txt = "Results: "+(t.numIncorrect())+"/10\n\n";
+                    
+                    txt+= t.getFeedback();
+            if(txt.equals("")){
+                System.out.println("No Feedback");
+            }
+            
             txtOut.setText(t.getFeedback());
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

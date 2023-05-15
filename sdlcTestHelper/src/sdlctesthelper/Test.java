@@ -50,4 +50,8 @@ public String getFeedback(){
 public int getLength(){
     return questions.size();
 }
+
+public int numIncorrect(){
+    return incorrect.size();
+}
 }

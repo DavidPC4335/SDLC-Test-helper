@@ -16,7 +16,6 @@ public class MainMenu extends javax.swing.JFrame {
     QuizMenu quiz;
     public MainMenu() {
         initComponents();
-        quiz = new QuizMenu(this);
     }
 
     /**
@@ -75,6 +74,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizActionPerformed
        this.setVisible(false);
+       quiz = new QuizMenu(this);
        quiz.setVisible(true);
     }//GEN-LAST:event_btnQuizActionPerformed
 
