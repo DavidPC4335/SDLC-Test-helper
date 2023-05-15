@@ -25,10 +25,12 @@ public boolean answerQustion(int i){
     return i==correctIndex;
 }
 
-public String getQuestion(int i){
+public String getAnswer(int i){
     return answers[i];
 }
-
+public String getQuestion(){
+    return question;
+}
 public String getFeedback(){
     return feedback;
 }
