@@ -46,4 +46,8 @@ public String getFeedback(){
     return fb;
 }
 
+
+public int getLength(){
+    return questions.size();
+}
 }

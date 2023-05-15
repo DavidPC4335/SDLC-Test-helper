@@ -20,15 +20,35 @@ public class QuizMenu extends javax.swing.JFrame {
     MainMenu menu;
     Test t;
     int selectIndex=0;
+    int questionIndex =0;
     public QuizMenu(MainMenu m) {
         initComponents();
         this.menu =m;
-        t = loadTest(new File("src/sdlctesthelper/test.txt"));
+       t = loadTest(new File("src/sdlctesthelper/test.txt"));
         btn0.setSelected(true);
+       showQuestion(questionIndex);
     }
 
-    
-    
+    public void showQuestion(int i){
+        Question q = t.getQuestion(i);
+        String s = q.getQuestion();
+        
+        if(s.length() >45){
+            lblQuestion.setText(s.substring(0,s.indexOf(" ",40)));
+            lblQuestion1.setText(s.substring(s.indexOf(" ",40)));
+        }else{
+        lblQuestion.setText(s);
+    }
+        lbl0.setText(q.getAnswer(0));
+        lbl1.setText(q.getAnswer(1));
+        lbl2.setText(q.getAnswer(2));
+        lbl3.setText(q.getAnswer(3));
+    }
+    /**
+     * 
+     * @param f
+     * @return 
+     */
     public Test loadTest(File f){
         Test t = new Test();
         String q ="";
@@ -40,8 +60,9 @@ public class QuizMenu extends javax.swing.JFrame {
                 for (int i = 0; i < 4; i++) {
                     answers[i] = s.nextLine();
                 }
+                t.add(new Question(q,answers,Integer.parseInt(s.nextLine())));
             }
-            t.add(new Question(q,answers,Integer.parseInt(s.nextLine())));
+            
         }catch(Exception e){
             System.out.println(e);
         }
@@ -63,8 +84,16 @@ public class QuizMenu extends javax.swing.JFrame {
         btn1 = new javax.swing.JRadioButton();
         btn2 = new javax.swing.JRadioButton();
         btn3 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblQuestion = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        lblQuestion1 = new javax.swing.JLabel();
+        lbl0 = new javax.swing.JLabel();
+        lbl2 = new javax.swing.JLabel();
+        lbl1 = new javax.swing.JLabel();
+        lbl3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtOut = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,7 +136,7 @@ public class QuizMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("<question>");
+        lblQuestion.setText("<question>");
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -116,52 +145,90 @@ public class QuizMenu extends javax.swing.JFrame {
             }
         });
 
+        lblQuestion1.setText("<question>");
+
+        lbl0.setText("d");
+
+        lbl2.setText("d");
+
+        lbl1.setText("d");
+
+        lbl3.setText("d");
+
+        txtOut.setColumns(20);
+        txtOut.setRows(5);
+        jScrollPane1.setViewportView(txtOut);
+
+        jLabel1.setText("Feedback:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn1)
+                            .addComponent(btn2)
+                            .addComponent(btn3)
+                            .addComponent(btn0))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl0, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                            .addComponent(lbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(btnSubmit)
+                        .addGap(73, 73, 73)
                         .addComponent(btnMenu))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btn1)
-                                    .addComponent(btn2)
-                                    .addComponent(btn3)
-                                    .addComponent(btn0)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(btnSubmit)
-                .addContainerGap(282, Short.MAX_VALUE))
+                            .addComponent(lblQuestion1)
+                            .addComponent(lblQuestion)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27)
-                .addComponent(btn0)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(btn1)
+                .addComponent(lblQuestion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblQuestion1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn0)
+                    .addComponent(lbl0))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn1)
+                    .addComponent(lbl1))
                 .addGap(16, 16, 16)
-                .addComponent(btn2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn2)
+                    .addComponent(lbl2))
                 .addGap(18, 18, 18)
-                .addComponent(btn3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn3)
+                    .addComponent(lbl3))
                 .addGap(19, 19, 19)
-                .addComponent(btnSubmit)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmit)
+                    .addComponent(btnMenu))
                 .addGap(20, 20, 20)
-                .addComponent(btnMenu)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addGap(43, 43, 43))
         );
 
         pack();
@@ -190,7 +257,14 @@ public class QuizMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        //submit code
+        
+        t.answerQuestion(questionIndex,selectIndex);
+        questionIndex++;
+        if(questionIndex<t.getLength()){
+            showQuestion(questionIndex);
+        }else{
+            txtOut.setText(t.getFeedback());
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
@@ -203,5 +277,13 @@ public class QuizMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnSubmit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl0;
+    private javax.swing.JLabel lbl1;
+    private javax.swing.JLabel lbl2;
+    private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lblQuestion;
+    private javax.swing.JLabel lblQuestion1;
+    private javax.swing.JTextArea txtOut;
     // End of variables declaration//GEN-END:variables
 }
