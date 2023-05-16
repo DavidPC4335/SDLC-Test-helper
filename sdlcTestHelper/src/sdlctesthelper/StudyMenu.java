@@ -20,40 +20,55 @@ public class StudyMenu extends javax.swing.JFrame {
      */
     MainMenu menu;
     ArrayList<String> s;
-    int index =0;
+    int index = 0;
+
+    /**
+     * constructor method for the study menu
+     *
+     * @param m - the Main Menu as a parameter
+     */
     public StudyMenu(MainMenu m) {
         initComponents();
-        this.menu =m;
+        this.menu = m;
         s = loadMaterial();
         showString(index);
     }
 
-    public void showString(int index){
-        if(index>=0 && index<s.size()){
-            this.index = index;
-            lblIndex.setText(index+"/"+(s.size()-1));
-            txtOut.setText(s.get(index).replaceAll("%","\n"));
+    /**
+     * method that displays the study material in the program
+     *
+     * @param index - the index of the string array list that holds the study
+     * material
+     */
+    public void showString(int index) {
+        if (index >= 0 && index < s.size()) {   //if the entered index is within a valid range
+            this.index = index; //set this index to the inputted index
+            lblIndex.setText(index + "/" + (s.size() - 1)); //set the text label to the number out of how many lines there are
+            txtOut.setText(s.get(index).replaceAll("%", "\n")); //replace special character with new line escape charater
         }
     }
-    
-    
-    public ArrayList<String> loadMaterial(){
-        ArrayList l = new ArrayList();
-        try{
-        InputStream in = StudyMenu.class.getResourceAsStream("study.txt");
-        
-        Scanner s = new Scanner(in);
-        while(s.hasNextLine()){
-            l.add(s.nextLine());
+
+    /**
+     * method for loading the array list with the study material
+     *
+     * @return - the the loaded array list
+     */
+    public ArrayList<String> loadMaterial() {
+        ArrayList l = new ArrayList();  //initialize new araylist
+        try {
+            InputStream in = StudyMenu.class.getResourceAsStream("study.txt");  //loads file
+
+            Scanner s = new Scanner(in);    //initializes scanner to file
+            while (s.hasNextLine()) {   //while there are lines to read
+                l.add(s.nextLine());    //add line to the arrray list
+            }
+
+        } catch (Exception e) { //catch any errs thrown
+            JOptionPane.showMessageDialog(null, e);
         }
-        
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-        }
-        return l;
+        return l;   //return loaded array list
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,17 +153,18 @@ public class StudyMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        menu.setVisible(true);
+        //switches to main menu
+        menu.setVisible(true);  
         this.setVisible(false);
         menu.study = new StudyMenu(menu);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        showString(index+1);
+        showString(index + 1);  //try to show the next study index
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-       showString(index-1);
+        showString(index - 1);  //try to show the previous study index
     }//GEN-LAST:event_btnPrevActionPerformed
 
 

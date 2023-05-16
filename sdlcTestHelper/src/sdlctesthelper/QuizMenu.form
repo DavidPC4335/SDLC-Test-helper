@@ -48,7 +48,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblProg" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="btnMenu" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -101,6 +103,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnMenu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblProg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -222,6 +225,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Feedback:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProg">
     </Component>
   </SubComponents>
 </Form>
