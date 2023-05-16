@@ -6,7 +6,9 @@ package sdlctesthelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +26,7 @@ public class QuizMenu extends javax.swing.JFrame {
     public QuizMenu(MainMenu m) {
         initComponents();
         this.menu =m;
-       t = loadTest(new File("src/sdlctesthelper/test.txt"));
+       t = loadTest();
         btn0.setSelected(true);
        showQuestion(questionIndex);
     }
@@ -49,7 +51,8 @@ public class QuizMenu extends javax.swing.JFrame {
      * @param f
      * @return 
      */
-    public Test loadTest(File f){
+    public Test loadTest(){
+        InputStream f = StudyMenu.class.getResourceAsStream("test.txt");
         Test t = new Test();
         String q ="";
         String[] answers = new String[4];
@@ -60,11 +63,11 @@ public class QuizMenu extends javax.swing.JFrame {
                 for (int i = 0; i < 4; i++) {
                     answers[i] = s.nextLine();
                 }
-                t.add(new Question(q,answers,Integer.parseInt(s.nextLine()),"Feedback"));
+                t.add(new Question(q,answers,Integer.parseInt(s.nextLine()),s.nextLine()));
             }
             
         }catch(Exception e){
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
         
         return t;
@@ -195,8 +198,8 @@ public class QuizMenu extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
