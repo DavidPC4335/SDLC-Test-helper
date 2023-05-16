@@ -155,6 +155,7 @@ public class QuizMenu extends javax.swing.JFrame {
 
         lbl3.setText("d");
 
+        txtOut.setEditable(false);
         txtOut.setColumns(20);
         txtOut.setRows(5);
         jScrollPane1.setViewportView(txtOut);
@@ -237,6 +238,8 @@ public class QuizMenu extends javax.swing.JFrame {
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         menu.setVisible(true);
         this.setVisible(false);
+        menu.quiz = new QuizMenu(menu);
+        
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
@@ -263,7 +266,7 @@ public class QuizMenu extends javax.swing.JFrame {
         if(questionIndex<t.getLength()-1){
             questionIndex++;
             showQuestion(questionIndex);
-        }else{
+        }else if(txtOut.getText().equals("")){
             String txt = "Results: "+(t.numIncorrect())+"/10\n\n";
                     
                     txt+= t.getFeedback();

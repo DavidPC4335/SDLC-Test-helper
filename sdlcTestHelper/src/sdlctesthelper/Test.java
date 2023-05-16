@@ -39,7 +39,7 @@ public boolean answerQuestion(int index, int answer){
 }
         
 public String getFeedback(){
-    String fb ="";
+    String fb = "SCORE: "+(getLength()-numIncorrect())+"/"+getLength() +"\n";
     for (int i = 0; i < incorrect.size(); i++) {
         fb += questions.indexOf(incorrect.get(i))+". "+incorrect.get(i).getFeedback()+"\n";
     }
