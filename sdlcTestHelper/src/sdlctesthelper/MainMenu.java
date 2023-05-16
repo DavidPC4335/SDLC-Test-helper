@@ -4,6 +4,8 @@
  */
 package sdlctesthelper;
 
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author dapav8190
@@ -14,9 +16,11 @@ public class MainMenu extends javax.swing.JFrame {
      * Creates new form MainMenu
      */
     QuizMenu quiz;
+    StudyMenu study;
     public MainMenu() {
         initComponents();
         quiz = new QuizMenu(this);
+        study = new StudyMenu(this);
     }
 
     /**
@@ -31,6 +35,8 @@ public class MainMenu extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         btnQuiz = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+        btnStudy = new javax.swing.JButton();
+        btExit = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -46,6 +52,20 @@ public class MainMenu extends javax.swing.JFrame {
         lblTitle.setFont(new java.awt.Font("Wide Latin", 0, 36)); // NOI18N
         lblTitle.setText("SDLC Test Helper");
 
+        btnStudy.setText("Study!");
+        btnStudy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudyActionPerformed(evt);
+            }
+        });
+
+        btExit.setText("Exit");
+        btExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,8 +77,14 @@ public class MainMenu extends javax.swing.JFrame {
                         .addComponent(lblTitle))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
-                        .addComponent(btnQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnQuiz, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(btnStudy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btExit)
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,7 +93,11 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(lblTitle)
                 .addGap(69, 69, 69)
                 .addComponent(btnQuiz, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnStudy, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(btExit)
+                .addContainerGap())
         );
 
         pack();
@@ -75,8 +105,19 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizActionPerformed
        this.setVisible(false);
+
        quiz.setVisible(true);
     }//GEN-LAST:event_btnQuizActionPerformed
+
+    private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
+        //closes the Window
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_btExitActionPerformed
+
+    private void btnStudyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudyActionPerformed
+       this.setVisible(false);
+       study.setVisible(true);
+    }//GEN-LAST:event_btnStudyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,7 +155,9 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btExit;
     private javax.swing.JButton btnQuiz;
+    private javax.swing.JButton btnStudy;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
