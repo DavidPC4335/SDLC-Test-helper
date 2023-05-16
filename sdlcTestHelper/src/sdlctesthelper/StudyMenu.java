@@ -4,6 +4,11 @@
  */
 package sdlctesthelper;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dapav8190
@@ -14,11 +19,41 @@ public class StudyMenu extends javax.swing.JFrame {
      * Creates new form StudyMenu
      */
     MainMenu menu;
+    ArrayList<String> s;
+    int index =0;
     public StudyMenu(MainMenu m) {
         initComponents();
         this.menu =m;
+        s = loadMaterial();
+        showString(index);
     }
 
+    public void showString(int index){
+        if(index>=0 && index<s.size()){
+            this.index = index;
+            lblIndex.setText(index+"/"+(s.size()-1));
+            txtOut.setText(s.get(index).replaceAll("%","\n"));
+        }
+    }
+    
+    
+    public ArrayList<String> loadMaterial(){
+        ArrayList l = new ArrayList();
+        try{
+        InputStream in = StudyMenu.class.getResourceAsStream("study.txt");
+        
+        Scanner s = new Scanner(in);
+        while(s.hasNextLine()){
+            l.add(s.nextLine());
+        }
+        
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }
+        return l;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,6 +68,7 @@ public class StudyMenu extends javax.swing.JFrame {
         btnNext = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
+        lblIndex = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,8 +78,18 @@ public class StudyMenu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtOut);
 
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
 
         btnPrev.setText("prev");
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -52,23 +98,27 @@ public class StudyMenu extends javax.swing.JFrame {
             }
         });
 
+        lblIndex.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 24)); // NOI18N
+        lblIndex.setText("INDEX");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPrev)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNext))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMenu)
-                .addGap(159, 159, 159))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(btnPrev)
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMenu)
+                    .addComponent(lblIndex))
+                .addGap(57, 57, 57)
+                .addComponent(btnNext)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,8 +128,9 @@ public class StudyMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNext)
-                    .addComponent(btnPrev))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                    .addComponent(btnPrev)
+                    .addComponent(lblIndex))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(btnMenu))
         );
 
@@ -92,12 +143,21 @@ public class StudyMenu extends javax.swing.JFrame {
         menu.study = new StudyMenu(menu);
     }//GEN-LAST:event_btnMenuActionPerformed
 
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        showString(index+1);
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+       showString(index-1);
+    }//GEN-LAST:event_btnPrevActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrev;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblIndex;
     private javax.swing.JTextArea txtOut;
     // End of variables declaration//GEN-END:variables
 }
