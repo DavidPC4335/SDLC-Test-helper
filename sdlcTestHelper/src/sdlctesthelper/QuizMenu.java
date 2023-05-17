@@ -1,11 +1,10 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+David PC and Camumm
+2023/05/16
+Quiz Menu that displays and interacts with Test classs
  */
 package sdlctesthelper;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -23,19 +22,25 @@ public class QuizMenu extends javax.swing.JFrame {
     Test t;
     int selectIndex = 0;
     int questionIndex = 0;
-
+/**
+ * main constructor for  menu
+ * @param m Main menu to return to
+ */
     public QuizMenu(MainMenu m) {
         initComponents();
-        this.menu = m;
-        t = loadTest();
-        btn0.setSelected(true);
-        showQuestion(questionIndex);
+        this.menu = m;//set menu to prev Main menu
+        t = loadTest();//loads the test from the Data file
+        btn0.setSelected(true);//set defaulkt button selected
+        showQuestion(questionIndex); //show questiuon on forum
     }
-
+/**
+ * shgow question on forum for answering
+ * @param i index of question
+ */
     public void showQuestion(int i) {
-        Question q = t.getQuestion(i);
+        Question q = t.getQuestion(i);//get WQuestion from test
         String s = q.getQuestion();
-
+        //format to fit GUI
         if (s.length() > 45) {
             lblProg.setText((i + 1) + "/" + t.getLength());
             lblQuestion.setText(s.substring(0, s.indexOf(" ", 40)));
@@ -43,6 +48,7 @@ public class QuizMenu extends javax.swing.JFrame {
         } else {
             lblQuestion.setText(s);
         }
+        //set the answers to eash button
         lbl0.setText(q.getAnswer(0));
         lbl1.setText(q.getAnswer(1));
         lbl2.setText(q.getAnswer(2));
@@ -50,11 +56,11 @@ public class QuizMenu extends javax.swing.JFrame {
     }
 
     /**
-     *
-     * @param f
-     * @return
+     *loads the test
+     * @return loaded Test
      */
     public Test loadTest() {
+        //get Test into scanner
         InputStream f = StudyMenu.class.getResourceAsStream("test.txt");
         Test t = new Test();
         String q = "";
@@ -62,10 +68,11 @@ public class QuizMenu extends javax.swing.JFrame {
         try {
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
-                q = s.nextLine();
-                for (int i = 0; i < 4; i++) {
+                q = s.nextLine();//parse in question
+                for (int i = 0; i < 4; i++) {//parse in neach possible answer
                     answers[i] = s.nextLine();
                 }
+                //add the new Question to the Test
                 t.add(new Question(q, answers, Integer.parseInt(s.nextLine()), s.nextLine()));
             }
 
@@ -255,36 +262,35 @@ public class QuizMenu extends javax.swing.JFrame {
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
         // TODO add your handling code here:
-        selectIndex = 0;
+        selectIndex = 0;//set index to 0
     }//GEN-LAST:event_btn0ActionPerformed
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-        selectIndex = 1;
+        selectIndex = 1;//set index to 1
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        selectIndex = 2;
+        selectIndex = 2;//set index to 2
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-        selectIndex = 3;
+        selectIndex = 3;//set index to 3
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-
+//submit action
         t.answerQuestion(questionIndex, selectIndex);
+        //answer question
         if (questionIndex < t.getLength() - 1) {
             questionIndex++;
+            //show Next question if n ot at end
             showQuestion(questionIndex);
         } else if (txtOut.getText().equals("")) {
+            
+            //print feedback from  test
             btnSubmit.setEnabled(false);
             String txt = "Results: " + (t.numIncorrect()) + "/10\n\n";
-
             txt += t.getFeedback();
-            if (txt.equals("")) {
-                System.out.println("No Feedback");
-            }
-
             txtOut.setText(t.getFeedback());
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

@@ -1,6 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+David PC and CamumM
+2023/05/16
+MainMenu JFrame that allows theuser to navigate to different menus
  */
 package sdlctesthelper;
 
@@ -15,10 +16,12 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    //declare study and quiz forms
     QuizMenu quiz;
     StudyMenu study;
     public MainMenu() {
         initComponents();
+        //instantiate new menus
         quiz = new QuizMenu(this);
         study = new StudyMenu(this);
     }
@@ -105,7 +108,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btnQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuizActionPerformed
        this.setVisible(false);
-
+//move to quizMenu
        quiz.setVisible(true);
     }//GEN-LAST:event_btnQuizActionPerformed
 
@@ -117,6 +120,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void btnStudyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudyActionPerformed
        this.setVisible(false);
        study.setVisible(true);
+       //move to study Menu
     }//GEN-LAST:event_btnStudyActionPerformed
 
     /**
