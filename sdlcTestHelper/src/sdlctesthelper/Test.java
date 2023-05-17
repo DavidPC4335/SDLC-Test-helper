@@ -31,7 +31,7 @@ public Question getQuestion(int i){
     return questions.get(i);
 }
 public boolean answerQuestion(int index, int answer){
-    boolean corr = questions.get(index).answerQustion(answer);
+    boolean corr = questions.get(index).answerQuestion(answer);
     if(!corr){
         incorrect.add(questions.get(index));
     }

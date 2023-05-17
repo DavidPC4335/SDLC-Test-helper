@@ -21,57 +21,61 @@ public class QuizMenu extends javax.swing.JFrame {
      */
     MainMenu menu;
     Test t;
-    int selectIndex=0;
-    int questionIndex =0;
+    int selectIndex = 0;
+    int questionIndex = 0;
+
     public QuizMenu(MainMenu m) {
         initComponents();
-        this.menu =m;
-       t = loadTest();
+        this.menu = m;
+        t = loadTest();
         btn0.setSelected(true);
-       showQuestion(questionIndex);
+        showQuestion(questionIndex);
     }
 
-    public void showQuestion(int i){
+    public void showQuestion(int i) {
         Question q = t.getQuestion(i);
         String s = q.getQuestion();
-        
-        if(s.length() >45){
-            lblQuestion.setText(s.substring(0,s.indexOf(" ",40)));
-            lblQuestion1.setText(s.substring(s.indexOf(" ",40)));
-        }else{
-        lblQuestion.setText(s);
-    }
+
+        if (s.length() > 45) {
+            lblProg.setText((i + 1) + "/" + t.getLength());
+            lblQuestion.setText(s.substring(0, s.indexOf(" ", 40)));
+            lblQuestion1.setText(s.substring(s.indexOf(" ", 40)));
+        } else {
+            lblQuestion.setText(s);
+        }
         lbl0.setText(q.getAnswer(0));
         lbl1.setText(q.getAnswer(1));
         lbl2.setText(q.getAnswer(2));
         lbl3.setText(q.getAnswer(3));
     }
+
     /**
-     * 
+     *
      * @param f
-     * @return 
+     * @return
      */
-    public Test loadTest(){
+    public Test loadTest() {
         InputStream f = StudyMenu.class.getResourceAsStream("test.txt");
         Test t = new Test();
-        String q ="";
+        String q = "";
         String[] answers = new String[4];
-        try{
+        try {
             Scanner s = new Scanner(f);
-            while(s.hasNextLine()){
+            while (s.hasNextLine()) {
                 q = s.nextLine();
                 for (int i = 0; i < 4; i++) {
                     answers[i] = s.nextLine();
                 }
-                t.add(new Question(q,answers,Integer.parseInt(s.nextLine()),s.nextLine()));
+                t.add(new Question(q, answers, Integer.parseInt(s.nextLine()), s.nextLine()));
             }
-            
-        }catch(Exception e){
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        
+
         return t;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +101,7 @@ public class QuizMenu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtOut = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        lblProg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,7 +192,9 @@ public class QuizMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(btnSubmit)
-                        .addGap(73, 73, 73)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblProg)
+                        .addGap(21, 21, 21)
                         .addComponent(btnMenu))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -227,7 +234,8 @@ public class QuizMenu extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
-                    .addComponent(btnMenu))
+                    .addComponent(btnMenu)
+                    .addComponent(lblProg))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -242,41 +250,41 @@ public class QuizMenu extends javax.swing.JFrame {
         menu.setVisible(true);
         this.setVisible(false);
         menu.quiz = new QuizMenu(menu);
-        
+
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btn0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn0ActionPerformed
         // TODO add your handling code here:
-        selectIndex =0;
+        selectIndex = 0;
     }//GEN-LAST:event_btn0ActionPerformed
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
-      selectIndex =1;
+        selectIndex = 1;
     }//GEN-LAST:event_btn1ActionPerformed
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-         selectIndex =2;
+        selectIndex = 2;
     }//GEN-LAST:event_btn2ActionPerformed
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
-       selectIndex =3;
+        selectIndex = 3;
     }//GEN-LAST:event_btn3ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        
-        
-        t.answerQuestion(questionIndex,selectIndex);
-        if(questionIndex<t.getLength()-1){
+
+        t.answerQuestion(questionIndex, selectIndex);
+        if (questionIndex < t.getLength() - 1) {
             questionIndex++;
             showQuestion(questionIndex);
-        }else if(txtOut.getText().equals("")){
-            String txt = "Results: "+(t.numIncorrect())+"/10\n\n";
-                    
-                    txt+= t.getFeedback();
-            if(txt.equals("")){
+        } else if (txtOut.getText().equals("")) {
+            btnSubmit.setEnabled(false);
+            String txt = "Results: " + (t.numIncorrect()) + "/10\n\n";
+
+            txt += t.getFeedback();
+            if (txt.equals("")) {
                 System.out.println("No Feedback");
             }
-            
+
             txtOut.setText(t.getFeedback());
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
@@ -296,6 +304,7 @@ public class QuizMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
     private javax.swing.JLabel lbl3;
+    private javax.swing.JLabel lblProg;
     private javax.swing.JLabel lblQuestion;
     private javax.swing.JLabel lblQuestion1;
     private javax.swing.JTextArea txtOut;
